@@ -20,3 +20,5 @@ RUN cargo install cargo-add
 
 ADD rls-build /usr/bin/rls-build
 RUN ext install rust-lang.rust 0.5.3
+
+RUN ln -s /root/.rustup/toolchains/nightly-2019-03-23-x86_64-unknown-linux-gnu/ /root/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu
