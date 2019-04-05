@@ -1,6 +1,7 @@
 FROM brainpower/cubicle
 
-RUN apt-get update && apt-get install --no-install-recommends -y ca-certificates curl file build-essential autoconf automake autotools-dev libtool xutils-dev && rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install --no-install-recommends -y ca-certificates curl file build-essential autoconf automake autotools-dev libtool xutils-dev expect && rm -rf /var/lib/apt/lists/*
 
 # Check for nightly builds with wanted components via https://hub.docker.com/r/brainpower/rust-component-history, 
 # e.g. via docker run brainpower/rust-component-history --target x86_64-unknown-linux-gnu
