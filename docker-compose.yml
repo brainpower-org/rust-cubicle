@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  rust-cubicle:
+    build: .
+    image: brainpower/rust-cubicle
+    ports:
+      - '8443:8443'
+    command: code-server --allow-http --no-auth

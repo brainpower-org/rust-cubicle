@@ -1,0 +1,21 @@
+FROM brainpower/cubicle
+
+RUN apt-get update && apt-get install --no-install-recommends -y ca-certificates curl file build-essential autoconf automake autotools-dev libtool xutils-dev && rm -rf /var/lib/apt/lists/*
+
+# Check for nightly builds with wanted components via https://hub.docker.com/r/brainpower/rust-component-history, 
+# e.g. via docker run brainpower/rust-component-history --target x86_64-unknown-linux-gnu
+# * rls
+# * clippy
+# * rustfmt
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly-2019-03-23 -y
+
+ENV PATH=/root/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV CARGO_TARGET_DIR=/root/target
+
+RUN rustup component add rls clippy rustfmt rust-analysis rust-src
+
+RUN cargo install cargo-watch
+RUN cargo install cargo-add
+
+ADD rls-build /usr/bin/rls-build
+RUN ext install rust-lang.rust 0.5.3
