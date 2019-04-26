@@ -19,6 +19,11 @@ RUN cargo install cargo-watch
 RUN cargo install cargo-add
 
 ADD rls-build /usr/bin/rls-build
-RUN ext install rust-lang.rust 0.6.1
+RUN code-server --install-extension rust-lang.rust 0.6.1
+RUN code-server --install-extension rserayuzgur.crates 0.4.2
+RUN code-server --install-extension bungcip.better-toml 0.3.2
+
+RUN apt-get update && apt-get install --no-install-recommends -y lldb
+RUN code-server --install-extension vadimcn.vscode-lldb 1.2.2
 
 RUN ln -s /root/.rustup/toolchains/nightly-2019-03-23-x86_64-unknown-linux-gnu/ /root/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu
