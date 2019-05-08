@@ -1,4 +1,4 @@
-FROM brainpower/cubicle
+FROM brainpower/cubicle:code-1.939-share-1.0.125
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install --no-install-recommends -y ca-certificates curl file build-essential autoconf automake autotools-dev libtool xutils-dev expect && rm -rf /var/lib/apt/lists/*
@@ -19,9 +19,9 @@ RUN cargo install cargo-watch
 RUN cargo install cargo-add
 
 ADD rls-build /usr/bin/rls-build
-RUN code-server --install-extension rust-lang.rust 0.6.1
-RUN code-server --install-extension rserayuzgur.crates 0.4.2
-RUN code-server --install-extension bungcip.better-toml 0.3.2
+RUN ext install rust-lang.rust 0.6.1
+RUN ext install serayuzgur.crates 0.4.2
+RUN ext install bungcip.better-toml 0.3.2
 
 RUN apt-get update && apt-get install --no-install-recommends -y lldb
 RUN code-server --install-extension vadimcn.vscode-lldb 1.2.2
